@@ -32,7 +32,7 @@ class AuthSpotifyService
         if ($newTokenNeeded) {
             $response = $this->httpClient->request('POST', 'https://accounts.spotify.com/api/token', [
                 'headers' => [
-                    'Authorization' => 'Basic ' . base64_encode('96e2c06444fe4b199f99d6bc3fc338f6' . ':' . 'e741455bc36e4fe1b4cef539dea5ae0d'),
+                    'Authorization' => 'Basic ' . base64_encode($this->clientId . ':' . $this->clientSecret),
                     'Content-Type' => 'application/x-www-form-urlencoded',
                 ],
                 'body' => [
