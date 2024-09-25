@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Song;
+use App\Entity\Track;
+use App\Form\TrackFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\AuthSpotifyService;
 use Doctrine\Common\Lexer\Token;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+
 
 class SongController extends AbstractController
 {
@@ -30,14 +34,19 @@ class SongController extends AbstractController
             ],
         ]);
 
-
         //dd($response->toArray()['tracks']['items']);
         $tracks=$response->toArray()['tracks']['items'];
         //$tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
 
+
+        // creates a Song object and initializes some data for this example
+        $track = new Track('');
+        $form = $this->createForm(TrackFormType::class, $track);
+
         return $this->render('song/index.html.twig', [
             'controller_name' => 'SongController',
             'tracks' => $tracks,
+            'form' => $form,
         ]);
     }
 }
