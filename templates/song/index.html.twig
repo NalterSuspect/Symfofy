@@ -3,7 +3,7 @@
 {% block title %}Hello SongController!{% endblock %}
 
 {% block body %}
-<style>git 
+<style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
@@ -11,12 +11,6 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    {% for track in tracks %}
-    <p>{{ track['name'] }}</p>
-    {% endfor %}
-</div>
-
-<div>
     {{ form_start(form) }}
 
     <div class="my-custom-class-for-errors">
@@ -25,10 +19,14 @@
 
     <div class="row">
         <div class="col">
-            {{ form_row(form.name) }}
+            {{ form_row(form.search) }}
         </div>
     </div>
     {{ form_end(form) }}
+
+    {% for result in results %}
+        <p>{{ result['name'] }}</p>
+    {% endfor %}
 </div>
 
 {% endblock %}
