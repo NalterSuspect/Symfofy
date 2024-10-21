@@ -25,7 +25,13 @@
     {{ form_end(form) }}
 
     {% for result in results %}
-        <p>{{ result['name'] }}</p>
+        {% if result.getPictureLink() == 'null' %}
+            <img src="{{ asset('img/imgnotfound.jpg') }}" alt="img" width="200" height="200">
+            <p>{{ result.getName() }}</p>
+        {% else %}
+            <img src="{{ result.getPictureLink() }}" alt="img" width="200" height="200">
+            <p>{{ result.getName() }}</p>
+        {% endif %}
     {% endfor %}
 </div>
 

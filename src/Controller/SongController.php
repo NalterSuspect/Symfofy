@@ -14,6 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+use App\Factory\SongFactory;
+use App\Factory\AlbumFactory;
+use App\Factory\ArtistFactory;
+
 
 class SongController extends AbstractController
 {
@@ -32,7 +36,7 @@ class SongController extends AbstractController
         $results=null;
         $search_param=$request->query->all();
         $defaultData = ['message' => 'Type your message here'];
-        $options=['album'=>'album','artist'=>'artist','playlist'=>'playlist','track'=>'track','show'=>'show','episode'=>'episode','audiobook'=>'audiobook'];
+        $options=['album'=>'album','artist'=>'artist','track'=>'track'];
         $form = $this->createFormBuilder($defaultData)
             ->add('search', TextType::class)
             ->add('type',ChoiceType::class,[
@@ -58,14 +62,26 @@ class SongController extends AbstractController
                 'offset'=>'1',
                 'include_external'=>'audio',
             ];
-
             $query=http_build_query($params);
+
             $response = $this->httpClient->request('GET', $endpoint.$query, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->token,
                 ],
             ]);
-            $results=$response->toArray()[$type.'s']['items'];
+            switch ($search_param['type']){
+                case 'track':
+                    $results=SongFactory::songFactory($response->toArray());
+                    break;
+                    case 'album':
+                        $results=AlbumFactory::albumFactory($response->toArray());
+                        break;
+                        case 'artist':
+                            $results=ArtistFactory::artistFactory($response->toArray());
+                            break;
+                        default:
+                            $results=[];
+            }
         }
 
         return $this->render('song/index.html.twig', [
