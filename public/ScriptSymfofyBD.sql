@@ -1,0 +1,17 @@
+CREATE TABLE "user" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"username"	TEXT NOT NULL,
+	"password"	TEXT NOT NULL
+);
+
+CREATE TABLE "album" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"name"	TEXT NOT NULL,
+	"picturelink"	TEXT NOT NULL
+);
+
+CREATE TABLE "track" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"name"	TEXT NOT NULL,
+	"picturelink"	TEXT NOT NULL
+);
