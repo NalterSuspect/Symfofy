@@ -4,16 +4,19 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class Song
 {
+    private string $id;
     private int $discNumber;
     private int $durationMs;
     private bool $explicit;
     private string $isrc;
     private string $spotifyUrl;
     private string $href;
-    private string $id;
     private bool $isLocal;
     private string $name;
     private int $popularity;
@@ -55,7 +58,6 @@ class Song
         $this->type = $type;
         $this->uri = $uri;
         $this->pictureLink = $pictureLink;
-        $this->users = new ArrayCollection();
     }
 
     // Getters for all properties

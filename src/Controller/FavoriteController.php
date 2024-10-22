@@ -11,6 +11,9 @@ class FavoriteController extends AbstractController
     #[Route('/favorite', name: 'app_favorite')]
     public function index(): Response
     {
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
 
         return $this->render('favorite/index.html.twig', [
             'controller_name' => 'FavoriteController',

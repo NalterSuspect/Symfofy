@@ -36,6 +36,7 @@ class SongController extends AbstractController
         if(!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
+
         $results=null;
         $search_param=$request->query->all();
         $defaultData = ['message' => 'Type your message here'];
