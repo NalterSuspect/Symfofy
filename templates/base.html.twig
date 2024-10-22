@@ -12,6 +12,17 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <nav>
+        <ul>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/song">Search</a></li>
+            <li><a href="/favorite">favorite</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
     </body>
 </html>

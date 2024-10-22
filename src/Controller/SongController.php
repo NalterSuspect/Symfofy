@@ -18,7 +18,6 @@ use App\Factory\SongFactory;
 use App\Factory\AlbumFactory;
 use App\Factory\ArtistFactory;
 
-
 class SongController extends AbstractController
 {
     private string $token;
@@ -33,6 +32,10 @@ class SongController extends AbstractController
     #[Route('/song', name: 'app_song')]
     public function index(Request $request): Response
     {
+
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         $results=null;
         $search_param=$request->query->all();
         $defaultData = ['message' => 'Type your message here'];
@@ -51,7 +54,6 @@ class SongController extends AbstractController
         }
 
         if($search_param) {
-
             $type=$search_param['type'];
             $endpoint="https://api.spotify.com/v1/search?";
             $params=[
@@ -85,7 +87,6 @@ class SongController extends AbstractController
         }
 
         return $this->render('song/index.html.twig', [
-            'controller_name' => 'SongController',
             'results' => $results,
             'form' => $form,
         ]);

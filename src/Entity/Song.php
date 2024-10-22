@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class Song
 {
     private int $discNumber;
@@ -52,6 +55,7 @@ class Song
         $this->type = $type;
         $this->uri = $uri;
         $this->pictureLink = $pictureLink;
+        $this->users = new ArrayCollection();
     }
 
     // Getters for all properties

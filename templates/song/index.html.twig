@@ -1,15 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SongController!{% endblock %}
+{% block title %}Home Page!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Home Page! ✅</h1>
 
     {{ form_start(form) }}
 
@@ -23,16 +18,23 @@
         </div>
     </div>
     {{ form_end(form) }}
-
-    {% for result in results %}
-        {% if result.getPictureLink() == 'null' %}
-            <img src="{{ asset('img/imgnotfound.jpg') }}" alt="img" width="200" height="200">
-            <p>{{ result.getName() }}</p>
-        {% else %}
-            <img src="{{ result.getPictureLink() }}" alt="img" width="200" height="200">
-            <p>{{ result.getName() }}</p>
-        {% endif %}
-    {% endfor %}
 </div>
+    <div class="grid">
+        {% for result in results %}
+            {% if result.getPictureLink() == 'null' %}
+                <div class="item">
+                    <img src="{{ asset('img/imgnotfound.jpg') }}" alt="img" width="200" height="200">
+                    <p>{{ result.getName() }}</p>
+                    <a href="favorite/{{ result.getId }}">add +</a>
+                </div>
+            {% else %}
+                <div class="item">
+                    <img src="{{ result.getPictureLink() }}" alt="img" width="200" height="200">
+                    <p>{{ result.getName() }}</p>
+                    <a href="favorite/{{ result.getId }}">add +</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

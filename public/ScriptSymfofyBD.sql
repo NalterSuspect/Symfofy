@@ -10,7 +10,7 @@ CREATE TABLE "album" (
 	"picturelink"	TEXT NOT NULL
 );
 
-CREATE TABLE "track" (
+CREATE TABLE "song" (
 	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
 	"name"	TEXT NOT NULL,
 	"picturelink"	TEXT NOT NULL
